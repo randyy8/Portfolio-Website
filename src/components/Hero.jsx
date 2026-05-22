@@ -114,7 +114,7 @@ export default function Hero() {
           </div>
 
           <h1 className="mb-5 text-white" aria-label="Hi, I'm Randy Salim">
-            <span className="mx-auto flex h-[78px] max-w-[920px] items-center justify-center overflow-hidden whitespace-nowrap sm:h-[92px] md:h-[104px]">
+            <span className="mx-auto flex h-[64px] max-w-[920px] items-center justify-center overflow-hidden whitespace-nowrap sm:h-[92px] md:h-[112px]">
               <span
                 className={`block font-normal leading-none tracking-tight ${currentItem.fontClass} ${currentItem.sizeClass}`}
               >
@@ -123,7 +123,7 @@ export default function Hero() {
               </span>
             </span>
 
-            <span className="mt-1 block font-[Mondwest] text-5xl font-normal leading-none tracking-tight sm:mt-2 sm:text-6xl md:text-7xl lg:text-8xl">
+            <span className="mt-0 block font-[Mondwest] text-5xl font-normal leading-none tracking-tight sm:mt-2 sm:text-6xl md:text-7xl lg:text-8xl">
               Randy Salim
             </span>
           </h1>
