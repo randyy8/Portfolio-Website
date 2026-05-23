@@ -93,7 +93,7 @@ export default function Hero() {
   const { displayedText, currentItem } = useTypewriter(greetings);
 
   return (
-    <section className="fixed inset-0 z-0 min-h-screen w-full overflow-hidden bg-black">
+    <section className="fixed inset-0 z-0 h-[100svh] w-full overflow-hidden bg-black">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="/videos/hero-video.mp4"
@@ -107,7 +107,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/25" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/10 to-black/40" />
 
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 text-center">
+      <div className="relative z-10 flex h-[100svh] items-center justify-center px-6 text-center">
         <div className="max-w-5xl">
           <div className="mx-auto mb-5 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 font-[NeueBit] text-sm tracking-[0.08em] text-white/80 backdrop-blur-md sm:text-base">
             Building calm, clean, and meaningful digital experiences.
