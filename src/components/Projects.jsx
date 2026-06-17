@@ -5,6 +5,55 @@ import { motion, AnimatePresence } from "framer-motion";
 const categories = ["All", "Web", "Programming", "Data", "AI / Machine Learning"];
 
 const projects = [
+
+  {
+    title: "BanSos (Banjir & Sosmed)",
+    course: "Software Engineering",
+    shortCourse: "SE",
+    category: "Web",
+    year: "2026",
+    date: "Febuary 2026 — Jun 2026",
+    image: "/image/Bansos.png",
+    description:
+      "A community-based web platform for real-time, verified flood reporting and risk monitoring across Jakarta.",
+    detail:
+      "BanSos is a website designed to help users monitor flood risks in the Jakarta area. Through this website, users can submit reports of flooding incidents and view reports from other residents based on their location. This project was created so that flood information does not come from just one source, but is also supplemented by reports from the local community and users, which are then verified by the administrators.",
+    stack: ["JS", "React", "TypeScript", "TailwindCSS", "Python", "FastAPI", "Supabase"],
+    link: "https://ban-sos.vercel.app",
+  },
+
+  {
+    title: "Grabcut",
+    course: "Computer Vision",
+    shortCourse: "CV",
+    category: "AI / Machine Learning",
+    year: "2026",
+    date: "March 2026 — May 2026",
+    image: "/image/Grabcut.png",
+    description:
+      "An interactive web-based computer vision tool for seamless object extraction and image segmentation using the GrabCut algorithm.",
+    detail:
+      "GrabCut Challenge is a group project created as a class project to make image segmentation more interactive through a web application. Users can draw a box around an object, and the system uses the GrabCut method to separate the object from the background. This project was created to make image segmentation more interactive and user-friendly, allowing users to easily separate objects from the background in images.",
+    stack: ["Vue.js",  "TypeScript", "Python", "FastAPI", "OpenCV","IoU", "Dice Score", "GrabCut Algorithm"],
+    link: "https://computer-vision-segmentation-via-en.vercel.app",
+  },
+
+  {
+    title: "Boomer GenAlpha Style Transfer",
+    course: "Natural Language Processing",
+    shortCourse: "NLP",
+    category: "AI / Machine Learning",
+    year: "2026",
+    date: "March 2026 — June 2026",
+    image: "/image/StyleTransfer.png",
+    description:
+      "An NLP-powered web application that bridges generational gaps by translating 'boomer' text into 'Gen Alpha' slang while maintaining its original meaning.",
+    detail:
+      "NLP Style Transfer Web Demo is a group project created to transform text from boomer style into Gen alpha style while keeping the main meaning of the sentence. This project was built as an academic group project to explore how natural language processing can help make communication more suitable for different audiences.",
+    stack: ["Python", "PyTorch", "Hugging Face", "Seq2Seq Transformer", "Gradio"],
+    link: "https://huggingface.co/spaces/randyy18/boomer-genalpha-style-transfer",
+  },
+
   {
     title: "Cucumber Game",
     course: "Object-Oriented Programming",
@@ -20,6 +69,7 @@ const projects = [
     stack: ["Java", "Database", "OOP", "Java Swing"],
     link: "https://github.com/randyy18/OOP-Cucumber-Game",
   },
+
   {
     title: "Coffee Website",
     course: "Human Computer Interaction",
@@ -35,6 +85,7 @@ const projects = [
     stack: ["Figma", "HTML", "CSS", "JavaScript"],
     link: "https://website-coffee-rust.vercel.app/index.html",
   },
+
   {
     title: "Production Growth Analysis",
     course: "Scientific Computing",
@@ -50,21 +101,7 @@ const projects = [
     stack: ["Python", "Numerical Method", "Data Visualization"],
     link: "https://github.com/randyy18/Scientific-Computing",
   },
-  // {
-  //   title: "Diabetes Classification",
-  //   course: "Machine Learning",
-  //   shortCourse: "ML",
-  //   category: "AI / Machine Learning",
-  //   year: "2025",
-  //   date: "May 2025 — Jun 2025",
-  //   image: "/image/diabetes.png",
-  //   description:
-  //     "Built a machine learning model to classify diabetes risk using patient health data and evaluation metrics.",
-  //   detail:
-  //     "Diabetes Classification is a machine learning project focused on preprocessing health data, training classification models, and evaluating performance using accuracy, precision, recall, and F1-score.",
-  //   stack: ["Python", "Pandas", "Scikit-Learn", "Machine Learning"],
-  //   link: "#",
-  // },
+
 ];
 
 export default function Projects() {
