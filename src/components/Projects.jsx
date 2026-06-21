@@ -51,7 +51,7 @@ const projects = [
     detail:
       "NLP Style Transfer Web Demo is a group project created to transform text from boomer style into Gen alpha style while keeping the main meaning of the sentence. This project was built as an academic group project to explore how natural language processing can help make communication more suitable for different audiences.",
     stack: ["Python", "PyTorch", "Hugging Face", "Seq2Seq Transformer", "Gradio"],
-    link: "https://huggingface.co/spaces/randyy18/boomer-genalpha-style-transfer",
+    link: "https://huggingface.co/spaces/randyy18/boomer-genalpha",
   },
 
   {
