@@ -1,5 +1,38 @@
 import { motion } from "framer-motion";
 
+
+const activityPhotos = [
+  {
+    image: "/image/activities/blu.jpeg",
+    title: "BLU Company Visit",
+  },
+  {
+    image: "/image/activities/blu2.jpeg",
+    title: "BLU Company Visit Team",
+  },
+  {
+    image: "/image/activities/fl.jfif",
+    title: "Freshmen Leader Program",
+  },
+  {
+    image: "/image/activities/fl2.jpeg",
+    title: "Freshmen Leader Team",
+  },
+  {
+    image: "/image/activities/floq.jfif",
+    title: "Floq Connect Workshop",
+  },
+  {
+    image: "/image/activities/fp.jpeg",
+    title: "Freshmen Partner Program",
+  },
+  {
+    image: "/image/activities/garena.jfif",
+    title: "Garena Company Visit",
+  },
+];
+
+
 export default function About() {
   return (
     <section
@@ -82,88 +115,63 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Row 2: Profile + Landmarks */}
-        <div className="mt-14 grid items-start gap-14 lg:grid-cols-[0.9fr_1.1fr]">
-          {/* Profile Cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.35 }}
-            className="border-t border-black/10 pt-8"
-          >
-            <p className="mb-6 font-[NeueBit] text-xl uppercase tracking-[0.2em] text-black/40">
-              Profile
-            </p>
+        
+      {/* Row 2: Automatic Activity Carousel */}
+      <div className="mt-20 border-t border-black/10 pt-10">
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="min-h-[132px] border border-black/10 bg-white/30 p-5 backdrop-blur-sm">
-                <p className="font-[NeueBit] text-3xl tracking-[0.04em] text-[#1c2a22]">
-                  CS Student
-                </p>
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <p className="mb-3 font-[NeueBit] text-xl uppercase tracking-[0.2em] text-black/40">
+            Beyond The Code
+          </p>
 
-                <p className="mt-2 font-sans text-sm leading-6 text-black/55">
-                  Focused on AI, Web3 and Crypto.
-                </p>
+          <h3 className="font-[Mondwest] text-4xl text-[#173f2a] sm:text-5xl">
+            Life, Moments & Experiences.
+          </h3>
+        </motion.div>
+
+        {/* Automatic Photo Slider */}
+        <div className="activity-slider mt-10 overflow-hidden">
+          <div className="activity-track flex w-max">
+
+            {[0, 1].map((copy) => (
+              <div
+                key={copy}
+                className="flex shrink-0 gap-4 pr-4"
+                aria-hidden={copy === 1}
+              >
+                {activityPhotos.map((photo) => (
+                  <div
+                    key={`${copy}-${photo.image}`}
+                    className="w-[260px] shrink-0 sm:w-[350px]"
+                  >
+                    {/* Photo */}
+                    <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10">
+                      <img
+                        src={photo.image}
+                        alt={copy === 0 ? photo.title : ""}
+                        loading="lazy"
+                        className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                      />
+                    </div>
+
+                    {/* Photo Title */}
+                    <h4 className="mt-3 text-center font-[NeueBit] text-2xl text-[#173f2a]">
+                      {photo.title}
+                    </h4>
+                  </div>
+                ))}
               </div>
+            ))}
 
-              <div className="min-h-[132px] border border-black/10 bg-white/30 p-5 backdrop-blur-sm">
-                <p className="font-[NeueBit] text-3xl tracking-[0.04em] text-[#1c2a22]">
-                  Creative Dev
-                </p>
-
-                <p className="mt-2 font-sans text-sm leading-6 text-black/55">
-                  Building clean and meaningful interfaces.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Landmarks Cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: "easeOut", delay: 0.1 }}
-            viewport={{ once: true, amount: 0.35 }}
-            className="border-t border-black/10 pt-8"
-          >
-            <p className="mb-6 font-[NeueBit] text-xl uppercase tracking-[0.2em] text-black/40">
-              Landmarks
-            </p>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="min-h-[132px] border border-black/10 bg-white/30 p-5 backdrop-blur-sm">
-                <h4 className="font-[NeueBit] text-3xl font-normal tracking-[0.04em]">
-                  Frontend
-                </h4>
-
-                <p className="mt-2 font-sans text-sm leading-6 text-black/55">
-                  React, Tailwind, UI Design
-                </p>
-              </div>
-
-              <div className="min-h-[132px] border border-black/10 bg-white/30 p-5 backdrop-blur-sm">
-                <h4 className="font-[NeueBit] text-3xl font-normal tracking-[0.04em]">
-                  AI
-                </h4>
-
-                <p className="mt-2 font-sans text-sm leading-6 text-black/55">
-                  Intelligent Systems
-                </p>
-              </div>
-
-              <div className="min-h-[132px] border border-black/10 bg-white/30 p-5 backdrop-blur-sm">
-                <h4 className="font-[NeueBit] text-3xl font-normal tracking-[0.04em]">
-                  Creative
-                </h4>
-
-                <p className="mt-2 font-sans text-sm leading-6 text-black/55">
-                  Portfolio & Web Experience
-                </p>
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </div>
+      </div>
       </div>
     </section>
   );

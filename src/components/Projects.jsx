@@ -250,7 +250,7 @@ export default function Projects() {
         <AnimatePresence>
           {selectedProject && (
             <motion.div
-              className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#050505]/90 px-4 py-6 backdrop-blur-md sm:px-5 sm:py-8"
+              className="scroll-lock-modal fixed inset-0 z-[9999] flex items-center justify-center bg-[#050505]/90 px-4 py-6 backdrop-blur-md sm:px-5 sm:py-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -275,13 +275,16 @@ export default function Projects() {
                     </h4>
                   </div>
 
+                  
                   <button
                     type="button"
                     onClick={() => setSelectedProject(null)}
-                    className="rounded-full border border-black/10 bg-white/30 px-4 py-2 font-[NeueBit] text-lg tracking-[0.06em] transition hover:bg-black hover:text-white"
+                    aria-label="Close project preview"
+                    className="cursor-pointer rounded-full border border-[#173f2a] px-4 py-2 text-[#173f2a] transition-all duration-300 hover:bg-[#173f2a] hover:text-white"
                   >
-                    Close
+                    Close 
                   </button>
+
                 </div>
 
                 <div className="max-h-[calc(88vh-82px)] overflow-y-auto px-5 py-6 sm:px-8">
@@ -319,15 +322,16 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-
+                  
                   <a
                     href={selectedProject.link}
                     target="_blank"
-                    rel="noreferrer"
-                    className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#173f2a] px-5 py-3 font-[NeueBit] text-lg tracking-[0.08em] text-white transition hover:scale-[1.03]"
+                    rel="noopener noreferrer"
+                    className="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#173f2a] px-5 py-3 font-[NeueBit] text-lg tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4f8a57]"
                   >
                     View Project ↗
                   </a>
+
                 </div>
               </motion.div>
             </motion.div>

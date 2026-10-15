@@ -66,26 +66,39 @@ const initialFormData = {
 
 export default function Contact() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isCvOpen, setIsCvOpen] = useState(false);
+  const cvUrl = "/Randy_Salim_CV.pdf";
   const [submitStatus, setSubmitStatus] = useState("idle");
   const [formData, setFormData] = useState(initialFormData);
 
   useEffect(() => {
-    if (isFormOpen) {
-      document.body.style.overflow = "hidden";
-      document.body.classList.add("modal-open");
-    } else {
-      document.body.style.overflow = "";
-      document.body.classList.remove("modal-open");
+  const isModalOpen = isFormOpen || isCvOpen;
+
+  document.body.style.overflow = isModalOpen ? "hidden" : "";
+  document.body.classList.toggle("modal-open", isModalOpen);
+
+  window.dispatchEvent(new Event("modal-state-change"));
+
+  const handleEscape = (event) => {
+    if (event.key === "Escape") {
+      if (isCvOpen) setIsCvOpen(false);
+
+      if (isFormOpen && submitStatus !== "loading") {
+        setIsFormOpen(false);
+        setSubmitStatus("idle");
+      }
     }
+  };
 
+  window.addEventListener("keydown", handleEscape);
+
+  return () => {
+    document.body.style.overflow = "";
+    document.body.classList.remove("modal-open");
+    window.removeEventListener("keydown", handleEscape);
     window.dispatchEvent(new Event("modal-state-change"));
-
-    return () => {
-      document.body.style.overflow = "";
-      document.body.classList.remove("modal-open");
-      window.dispatchEvent(new Event("modal-state-change"));
-    };
-  }, [isFormOpen]);
+  };
+  }, [isFormOpen, isCvOpen, submitStatus]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -207,13 +220,24 @@ export default function Contact() {
               technology and design. Looking forward to connecting with you!
             </p>
 
+            
             <div className="mt-10 flex flex-wrap gap-3">
+              {/* Send Message Button */}
               <button
                 type="button"
                 onClick={() => setIsFormOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-[#173f2a] px-6 py-3 font-[NeueBit] text-lg tracking-[0.08em] text-white transition duration-300 hover:scale-[1.03]"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#173f2a] px-6 py-3 font-[NeueBit] text-lg tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4f8a57] hover:shadow-lg"
               >
                 Send Message ↗
+              </button>
+
+              {/* View CV Button */}
+              <button
+                type="button"
+                onClick={() => setIsCvOpen(true)}
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#173f2a] px-6 py-3 font-[NeueBit] text-lg tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4f8a57] hover:shadow-lg"
+              >
+                View CV ↗
               </button>
             </div>
           </motion.div>
@@ -274,7 +298,7 @@ export default function Contact() {
         <AnimatePresence>
           {isFormOpen && (
             <motion.div
-              className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#050505]/70 px-4 py-6 backdrop-blur-md"
+              className="scroll-lock-modal fixed inset-0 z-[9999] flex items-center justify-center bg-[#050505]/70 px-4 py-6 backdrop-blur-md"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -302,7 +326,7 @@ export default function Contact() {
                     type="button"
                     onClick={closeForm}
                     disabled={submitStatus === "loading"}
-                    className="rounded-full border border-black/10 bg-white/30 px-3 py-2 font-[NeueBit] text-lg transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    className="cursor-pointer rounded-full border border-[#173f2a] px-4 py-2 text-[#173f2a] transition-all duration-300 hover:bg-[#173f2a] hover:text-white"
                   >
                     Close
                   </button>
@@ -403,13 +427,87 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={submitStatus === "loading" || !WEB3FORMS_ACCESS_KEY}
-                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-md bg-[#173f2a] px-5 py-3 font-[NeueBit] text-lg tracking-[0.08em] text-white transition duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70"
+                    className="mt-5 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-[#173f2a] px-5 py-3 font-[NeueBit] text-lg tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4f8a57] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:bg-[#173f2a]"
                   >
                     {submitStatus === "loading"
                       ? "Sending..."
                       : "Send Message ↗"}
                   </button>
                 </form>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
+      
+      {/* CV Preview Modal */}
+      {createPortal(
+        <AnimatePresence>
+          {isCvOpen && (
+            <motion.div
+              className="scroll-lock-modal fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 p-3 backdrop-blur-md sm:p-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsCvOpen(false)}
+            >
+              <motion.div
+                role="dialog"
+                aria-modal="true"
+                aria-label="CV Preview"
+                className="flex h-[90dvh] w-full max-w-5xl flex-col overflow-hidden rounded-lg bg-[#f3f1e8] shadow-2xl"
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                onClick={(event) => event.stopPropagation()}
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
+                  <div>
+                    <h2 className="font-[Mondwest] text-3xl text-[#173f2a] sm:text-4xl">
+                      Curriculum Vitae
+                    </h2>
+                    <p className="font-[NeueBit] text-sm tracking-widest text-black/50">
+                      RANDY SALIM
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsCvOpen(false)}
+                    aria-label="Close CV preview"
+                    className="cursor-pointer rounded-full border border-[#173f2a] px-4 py-2 text-[#173f2a] transition-all duration-300 hover:bg-[#173f2a] hover:text-white"
+                  >
+                    Close
+                  </button>
+                </div>
+
+                {/* PDF Preview */}
+                <div className="min-h-0 flex-1 bg-[#d9d9d9]">
+                  <iframe
+                    src={`${cvUrl}#toolbar=0`}
+                    title="Randy Salim CV"
+                    className="h-full w-full border-0"
+                  />
+                </div>
+
+                {/* Footer */}
+                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/10 px-5 py-4">
+                  <p className="font-[NeueBit] text-sm text-black/50">
+                    My Curriculum Vitae
+                  </p>
+
+                  <a
+                    href={cvUrl}
+                    download="Randy_Salim_CV.pdf"
+                    className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#173f2a] px-6 py-3 font-[NeueBit] text-lg text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4f8a57]"
+                  >
+                    Download CV ↓
+                  </a>
+                </div>
               </motion.div>
             </motion.div>
           )}
